@@ -165,13 +165,13 @@ function App() {
             </p>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
               <span className="px-4 py-2 bg-[#FAFDD6] text-[#647FBC] rounded-full text-sm font-medium">
-                15+ Years Experience
+                5+ Years Experience
               </span>
               <span className="px-4 py-2 bg-[#FAFDD6] text-[#647FBC] rounded-full text-sm font-medium">
-                Digital Pioneer
+                CBT Expert Pioneer
               </span>
               <span className="px-4 py-2 bg-[#FAFDD6] text-[#647FBC] rounded-full text-sm font-medium">
-                Trauma Specialist
+                Couple Therapy Expert
               </span>
             </div>
           </div>
@@ -238,11 +238,16 @@ function App() {
           </div>
           <div className="space-y-4 text-lg leading-relaxed">
             <p>
-              At Minimalistic Technology, we don't just create websites. We
-              empower businesses — wherever they are.
+              Our mission is to provide compassionate, personalized, and
+              evidence-based psychological care that empowers individuals to
+              understand themselves better, overcome challenges, and build
+              healthier, more fulfilling lives. We are committed to creating a
+              safe, supportive, and non-judgmental space where every person
+              feels heard, valued, and respected. Through guidance,
+              collaboration, and proven therapeutic practices, we strive to help
+              our clients achieve emotional well-being, personal growth, and
+              lasting positive change.
             </p>
-            <p>Let us help you bring your business online.</p>
-            <p className="text-xl font-semibold">Your journey starts here.</p>
           </div>
         </div>
 
@@ -315,7 +320,7 @@ function App() {
       <footer className="bg-white border-t-2 border-[#AED6CF] py-8">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <p className="text-gray-600">
-            © 2025 Ana Paula Psychology. Empowering minds, transforming lives.
+            © 2025 Ana Paula Psychology. Empowering minds, Peacefull lives.
           </p>
         </div>
       </footer>
