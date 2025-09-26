@@ -1,119 +1,4 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 "use client"
-// try 
-
 import React, { useState } from "react";
 import {
   User,
@@ -148,13 +33,13 @@ function App() {
     confirmPassword: "",
   });
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = (e) => {
     e.preventDefault();
     console.log("Login data:", loginData);
     // Handle login logic here
   };
 
-  const handleSignupSubmit = (e: React.FormEvent) => {
+  const handleSignupSubmit = (e) => {
     e.preventDefault();
     console.log("Signup data:", signupData);
     // Handle signup logic here
@@ -163,15 +48,15 @@ function App() {
   const LoginForm = () => (
     <div className="w-full max-w-md mx-auto">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-blue-600 mb-2">Welcome Back</h1>
-        <p className="text-blue-500">Sign in to continue your journey</p>
+        <h1 className="text-3xl font-bold text-[#647FBC] mb-2">Welcome Back</h1>
+        <p className="text-gray-600">Sign in to continue your journey</p>
       </div>
 
       <form onSubmit={handleLoginSubmit} className="space-y-6">
         <div className="space-y-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Mail className="h-5 w-5 text-blue-400" />
+              <Mail className="h-5 w-5 text-[#647FBC]" />
             </div>
             <input
               type="email"
@@ -180,14 +65,14 @@ function App() {
               onChange={(e) =>
                 setLoginData({ ...loginData, email: e.target.value })
               }
-              className="w-full pl-10 pr-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-blue-700 placeholder-blue-400"
+              className="w-full pl-10 pr-4 py-3 border border-[#91ADC8] rounded-lg focus:ring-2 focus:ring-[#647FBC] focus:border-[#647FBC] outline-none transition-colors bg-white text-gray-800 placeholder-gray-500"
               required
             />
           </div>
 
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Lock className="h-5 w-5 text-blue-400" />
+              <Lock className="h-5 w-5 text-[#647FBC]" />
             </div>
             <input
               type={showPassword ? "text" : "password"}
@@ -196,7 +81,7 @@ function App() {
               onChange={(e) =>
                 setLoginData({ ...loginData, password: e.target.value })
               }
-              className="w-full pl-10 pr-12 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-blue-700 placeholder-blue-400"
+              className="w-full pl-10 pr-12 py-3 border border-[#91ADC8] rounded-lg focus:ring-2 focus:ring-[#647FBC] focus:border-[#647FBC] outline-none transition-colors bg-white text-gray-800 placeholder-gray-500"
               required
             />
             <button
@@ -205,9 +90,9 @@ function App() {
               className="absolute inset-y-0 right-0 pr-3 flex items-center"
             >
               {showPassword ? (
-                <EyeOff className="h-5 w-5 text-blue-400 hover:text-blue-600" />
+                <EyeOff className="h-5 w-5 text-[#647FBC] hover:text-[#AED6CF]" />
               ) : (
-                <Eye className="h-5 w-5 text-blue-400 hover:text-blue-600" />
+                <Eye className="h-5 w-5 text-[#647FBC] hover:text-[#AED6CF]" />
               )}
             </button>
           </div>
@@ -217,13 +102,13 @@ function App() {
           <label className="flex items-center">
             <input
               type="checkbox"
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-blue-300 rounded"
+              className="h-4 w-4 text-[#AED6CF] focus:ring-[#AED6CF] border-gray-300 rounded"
             />
-            <span className="ml-2 text-sm text-blue-600">Remember me</span>
+            <span className="ml-2 text-sm text-gray-700">Remember me</span>
           </label>
           <a
             href="#"
-            className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
+            className="text-sm text-[#647FBC] hover:text-[#AED6CF] transition-colors"
           >
             Forgot password?
           </a>
@@ -231,18 +116,18 @@ function App() {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 font-medium flex items-center justify-center gap-2 group"
+          className="w-full bg-[#FAFDD6] text-[#647FBC] py-3 px-4 rounded-lg hover:bg-[#AED6CF] focus:ring-4 focus:ring-[#91ADC8] transition-all duration-200 font-medium flex items-center justify-center gap-2 group"
         >
           Sign In
           <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </button>
 
         <div className="text-center">
-          <span className="text-blue-600">Don't have an account? </span>
+          <span className="text-gray-600">Don't have an account? </span>
           <button
             type="button"
             onClick={() => setIsLogin(false)}
-            className="text-blue-700 font-medium hover:text-blue-800 transition-colors"
+            className="text-[#647FBC] font-medium hover:text-[#AED6CF] transition-colors"
           >
             Sign up
           </button>
@@ -254,17 +139,17 @@ function App() {
   const SignupForm = () => (
     <div className="w-full max-w-2xl mx-auto">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-blue-600 mb-2">
+        <h1 className="text-3xl font-bold text-[#647FBC] mb-2">
           Join Our Community
         </h1>
-        <p className="text-blue-500">Create your account to get started</p>
+        <p className="text-gray-600">Create your account to get started</p>
       </div>
 
       <form onSubmit={handleSignupSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <User className="h-5 w-5 text-blue-400" />
+              <User className="h-5 w-5 text-[#647FBC]" />
             </div>
             <input
               type="text"
@@ -273,14 +158,14 @@ function App() {
               onChange={(e) =>
                 setSignupData({ ...signupData, fullName: e.target.value })
               }
-              className="w-full pl-10 pr-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-blue-700 placeholder-blue-400"
+              className="w-full pl-10 pr-4 py-3 border border-[#91ADC8] rounded-lg focus:ring-2 focus:ring-[#647FBC] focus:border-[#647FBC] outline-none transition-colors bg-white text-gray-800 placeholder-gray-500"
               required
             />
           </div>
 
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Mail className="h-5 w-5 text-blue-400" />
+              <Mail className="h-5 w-5 text-[#647FBC]" />
             </div>
             <input
               type="email"
@@ -289,7 +174,7 @@ function App() {
               onChange={(e) =>
                 setSignupData({ ...signupData, email: e.target.value })
               }
-              className="w-full pl-10 pr-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-blue-700 placeholder-blue-400"
+              className="w-full pl-10 pr-4 py-3 border border-[#91ADC8] rounded-lg focus:ring-2 focus:ring-[#647FBC] focus:border-[#647FBC] outline-none transition-colors bg-white text-gray-800 placeholder-gray-500"
               required
             />
           </div>
@@ -298,7 +183,7 @@ function App() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Phone className="h-5 w-5 text-blue-400" />
+              <Phone className="h-5 w-5 text-[#647FBC]" />
             </div>
             <input
               type="tel"
@@ -307,7 +192,7 @@ function App() {
               onChange={(e) =>
                 setSignupData({ ...signupData, phoneNumber: e.target.value })
               }
-              className="w-full pl-10 pr-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-blue-700 placeholder-blue-400"
+              className="w-full pl-10 pr-4 py-3 border border-[#91ADC8] rounded-lg focus:ring-2 focus:ring-[#647FBC] focus:border-[#647FBC] outline-none transition-colors bg-white text-gray-800 placeholder-gray-500"
               required
             />
           </div>
@@ -318,7 +203,7 @@ function App() {
               onChange={(e) =>
                 setSignupData({ ...signupData, gender: e.target.value })
               }
-              className="w-full pl-4 pr-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-blue-700 appearance-none"
+              className="w-full pl-4 pr-4 py-3 border border-[#91ADC8] rounded-lg focus:ring-2 focus:ring-[#647FBC] focus:border-[#647FBC] outline-none transition-colors bg-white text-gray-800 appearance-none"
               required
             >
               <option value="">Select Gender</option>
@@ -329,7 +214,7 @@ function App() {
             </select>
             <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
               <svg
-                className="h-4 w-4 text-blue-400"
+                className="h-4 w-4 text-[#647FBC]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -348,7 +233,7 @@ function App() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <MapPin className="h-5 w-5 text-blue-400" />
+              <MapPin className="h-5 w-5 text-[#647FBC]" />
             </div>
             <input
               type="text"
@@ -357,14 +242,14 @@ function App() {
               onChange={(e) =>
                 setSignupData({ ...signupData, location: e.target.value })
               }
-              className="w-full pl-10 pr-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-blue-700 placeholder-blue-400"
+              className="w-full pl-10 pr-4 py-3 border border-[#91ADC8] rounded-lg focus:ring-2 focus:ring-[#647FBC] focus:border-[#647FBC] outline-none transition-colors bg-white text-gray-800 placeholder-gray-500"
               required
             />
           </div>
 
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Calendar className="h-5 w-5 text-blue-400" />
+              <Calendar className="h-5 w-5 text-[#647FBC]" />
             </div>
             <input
               type="date"
@@ -373,7 +258,7 @@ function App() {
               onChange={(e) =>
                 setSignupData({ ...signupData, dateOfBirth: e.target.value })
               }
-              className="w-full pl-10 pr-4 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-blue-700"
+              className="w-full pl-10 pr-4 py-3 border border-[#91ADC8] rounded-lg focus:ring-2 focus:ring-[#647FBC] focus:border-[#647FBC] outline-none transition-colors bg-white text-gray-800"
               required
             />
           </div>
@@ -382,7 +267,7 @@ function App() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Lock className="h-5 w-5 text-blue-400" />
+              <Lock className="h-5 w-5 text-[#647FBC]" />
             </div>
             <input
               type={showPassword ? "text" : "password"}
@@ -391,7 +276,7 @@ function App() {
               onChange={(e) =>
                 setSignupData({ ...signupData, password: e.target.value })
               }
-              className="w-full pl-10 pr-12 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-blue-700 placeholder-blue-400"
+              className="w-full pl-10 pr-12 py-3 border border-[#91ADC8] rounded-lg focus:ring-2 focus:ring-[#647FBC] focus:border-[#647FBC] outline-none transition-colors bg-white text-gray-800 placeholder-gray-500"
               required
             />
             <button
@@ -400,16 +285,16 @@ function App() {
               className="absolute inset-y-0 right-0 pr-3 flex items-center"
             >
               {showPassword ? (
-                <EyeOff className="h-5 w-5 text-blue-400 hover:text-blue-600" />
+                <EyeOff className="h-5 w-5 text-[#647FBC] hover:text-[#AED6CF]" />
               ) : (
-                <Eye className="h-5 w-5 text-blue-400 hover:text-blue-600" />
+                <Eye className="h-5 w-5 text-[#647FBC] hover:text-[#AED6CF]" />
               )}
             </button>
           </div>
 
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Lock className="h-5 w-5 text-blue-400" />
+              <Lock className="h-5 w-5 text-[#647FBC]" />
             </div>
             <input
               type={showConfirmPassword ? "text" : "password"}
@@ -421,7 +306,7 @@ function App() {
                   confirmPassword: e.target.value,
                 })
               }
-              className="w-full pl-10 pr-12 py-3 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors bg-white text-blue-700 placeholder-blue-400"
+              className="w-full pl-10 pr-12 py-3 border border-[#91ADC8] rounded-lg focus:ring-2 focus:ring-[#647FBC] focus:border-[#647FBC] outline-none transition-colors bg-white text-gray-800 placeholder-gray-500"
               required
             />
             <button
@@ -430,9 +315,9 @@ function App() {
               className="absolute inset-y-0 right-0 pr-3 flex items-center"
             >
               {showConfirmPassword ? (
-                <EyeOff className="h-5 w-5 text-blue-400 hover:text-blue-600" />
+                <EyeOff className="h-5 w-5 text-[#647FBC] hover:text-[#AED6CF]" />
               ) : (
-                <Eye className="h-5 w-5 text-blue-400 hover:text-blue-600" />
+                <Eye className="h-5 w-5 text-[#647FBC] hover:text-[#AED6CF]" />
               )}
             </button>
           </div>
@@ -442,16 +327,22 @@ function App() {
           <input
             type="checkbox"
             id="terms"
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-blue-300 rounded"
+            className="h-4 w-4 text-[#AED6CF] focus:ring-[#AED6CF] border-gray-300 rounded"
             required
           />
-          <label htmlFor="terms" className="ml-2 text-sm text-blue-600">
+          <label htmlFor="terms" className="ml-2 text-sm text-gray-700">
             I agree to the{" "}
-            <a href="#" className="text-blue-700 hover:text-blue-800 underline">
+            <a
+              href="#"
+              className="text-[#647FBC] hover:text-[#AED6CF] underline"
+            >
               Terms of Service
             </a>{" "}
             and{" "}
-            <a href="#" className="text-blue-700 hover:text-blue-800 underline">
+            <a
+              href="#"
+              className="text-[#647FBC] hover:text-[#AED6CF] underline"
+            >
               Privacy Policy
             </a>
           </label>
@@ -459,18 +350,18 @@ function App() {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all duration-200 font-medium flex items-center justify-center gap-2 group"
+          className="w-full bg-[#FAFDD6] text-[#647FBC] py-3 px-4 rounded-lg hover:bg-[#AED6CF] focus:ring-4 focus:ring-[#91ADC8] transition-all duration-200 font-medium flex items-center justify-center gap-2 group"
         >
           Create Account
           <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </button>
 
         <div className="text-center">
-          <span className="text-blue-600">Already have an account? </span>
+          <span className="text-gray-600">Already have an account? </span>
           <button
             type="button"
             onClick={() => setIsLogin(true)}
-            className="text-blue-700 font-medium hover:text-blue-800 transition-colors"
+            className="text-[#647FBC] font-medium hover:text-[#AED6CF] transition-colors"
           >
             Sign in
           </button>
@@ -480,8 +371,8 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 w-full max-w-4xl border border-blue-100">
+    <div className="min-h-screen bg-[#91ADC8] flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 w-full max-w-4xl border border-[#AED6CF]">
         {isLogin ? <LoginForm /> : <SignupForm />}
       </div>
     </div>
