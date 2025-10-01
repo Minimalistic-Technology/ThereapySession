@@ -1,15 +1,8 @@
-"use client"
-
+"use client";
 import React, { useState } from "react";
-import {
-  Lock,
-  Mail,
-  ArrowRight,
-  Eye,
-  EyeOff,
-  Heart,
-} from "lucide-react";
+import { Lock, Mail, ArrowRight, Eye, EyeOff, Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 interface LoginProps {
   onSwitchToSignup: () => void;
@@ -21,13 +14,34 @@ const Login: React.FC<LoginProps> = ({ onSwitchToSignup }) => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Login data:", loginData);
-    // Handle login logic here
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/userauth/login",
+        loginData
+      );
+      const { token, user } = response.data;
+
+      // Store token in localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("therapy-user", JSON.stringify(user));
+
+      // Redirect to dashboard
+      router.push("/");
+    } catch (err: any) {
+      setError(err.response?.data?.message || "An error occurred during login");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -44,6 +58,12 @@ const Login: React.FC<LoginProps> = ({ onSwitchToSignup }) => {
             <p className="text-gray-600">Continue your journey of growth</p>
           </div>
 
+          {error && (
+            <div className="bg-red-100 text-red-700 p-3 rounded-xl mb-4 text-sm">
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleLoginSubmit} className="space-y-6">
             <div className="space-y-4">
               <div className="relative">
@@ -59,6 +79,7 @@ const Login: React.FC<LoginProps> = ({ onSwitchToSignup }) => {
                   }
                   className="w-full pl-10 pr-4 py-3 border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all bg-white/70 text-gray-800 placeholder-gray-500 hover:bg-white/90"
                   required
+                  disabled={isLoading}
                 />
               </div>
 
@@ -75,11 +96,13 @@ const Login: React.FC<LoginProps> = ({ onSwitchToSignup }) => {
                   }
                   className="w-full pl-10 pr-12 py-3 border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all bg-white/70 text-gray-800 placeholder-gray-500 hover:bg-white/90"
                   required
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  disabled={isLoading}
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5 text-blue-500 hover:text-yellow-500 transition-colors" />
@@ -95,6 +118,7 @@ const Login: React.FC<LoginProps> = ({ onSwitchToSignup }) => {
                 <input
                   type="checkbox"
                   className="h-4 w-4 text-blue-500 focus:ring-blue-400 border-blue-300 rounded"
+                  disabled={isLoading}
                 />
                 <span className="ml-2 text-sm text-gray-700">Remember me</span>
               </label>
@@ -108,9 +132,10 @@ const Login: React.FC<LoginProps> = ({ onSwitchToSignup }) => {
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-400 to-yellow-400 text-white py-3 px-4 rounded-xl hover:from-blue-500 hover:to-yellow-500 focus:ring-4 focus:ring-blue-300 transition-all duration-200 font-semibold flex items-center justify-center gap-2 group transform hover:scale-105 shadow-lg"
+              className="w-full bg-gradient-to-r from-blue-400 to-yellow-400 text-white py-3 px-4 rounded-xl hover:from-blue-500 hover:to-yellow-500 focus:ring-4 focus:ring-blue-300 transition-all duration-200 font-semibold flex items-center justify-center gap-2 group transform hover:scale-105 shadow-lg disabled:opacity-50"
+              disabled={isLoading}
             >
-              Sign In
+              {isLoading ? "Signing In..." : "Sign In"}
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </button>
 
@@ -127,7 +152,7 @@ const Login: React.FC<LoginProps> = ({ onSwitchToSignup }) => {
               type="button"
               onClick={() => router.push("/Signup")}
               className="w-full bg-white border-2 border-blue-200 text-blue-600 py-3 px-4 rounded-xl hover:bg-blue-50 hover:border-blue-300 focus:ring-4 focus:ring-blue-200 transition-all duration-200 font-semibold transform hover:scale-105"
-              
+              disabled={isLoading}
             >
               Create New Account
             </button>

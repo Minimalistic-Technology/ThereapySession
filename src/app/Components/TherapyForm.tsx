@@ -51,7 +51,7 @@ const TherapyForm: React.FC<TherapyFormProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center  backdrop-blur-md bg-white/10 ">
       <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-4xl relative">
         {/* Close Button */}
         <button
