@@ -11,6 +11,7 @@ import {
   Eye,
   EyeOff,
   Heart,
+  ArrowLeft,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
@@ -22,6 +23,7 @@ interface SignupProps {
 const Signup: React.FC<SignupProps> = ({ onSwitchToLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [step, setStep] = useState<1 | 2>(1); // 1: form, 2: OTP
   const [signupData, setSignupData] = useState({
     fullName: "",
     email: "",
@@ -32,8 +34,10 @@ const Signup: React.FC<SignupProps> = ({ onSwitchToLogin }) => {
     password: "",
     confirmPassword: "",
   });
+  const [otp, setOtp] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -50,7 +54,7 @@ const Signup: React.FC<SignupProps> = ({ onSwitchToLogin }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/userauth/signup",
+        "http://localhost:5000/api/auth/signup/send-otp",
         {
           fullName: signupData.fullName,
           email: signupData.email,
@@ -63,9 +67,40 @@ const Signup: React.FC<SignupProps> = ({ onSwitchToLogin }) => {
         }
       );
 
-      // Optionally, automatically log the user in after signup
+      setMessage("OTP sent to your email. Please check your inbox.");
+      setStep(2);
+    } catch (err: any) {
+      setError(
+        err.response?.data?.message || "An error occurred during OTP sending"
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleOtpSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setIsLoading(true);
+
+    if (otp.length !== 6) {
+      setError("OTP must be 6 digits");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/signup/verify-otp",
+        {
+          email: signupData.email,
+          otp,
+        }
+      );
+
+      // Automatically log the user in after successful signup
       const loginResponse = await axios.post(
-        "http://localhost:5000/api/userauth/login",
+        "http://localhost:5000/api/auth/login",
         {
           email: signupData.email,
           password: signupData.password,
@@ -80,12 +115,102 @@ const Signup: React.FC<SignupProps> = ({ onSwitchToLogin }) => {
       router.push("/");
     } catch (err: any) {
       setError(
-        err.response?.data?.message || "An error occurred during signup"
+        err.response?.data?.message ||
+          "An error occurred during OTP verification"
       );
     } finally {
       setIsLoading(false);
     }
   };
+
+  const handleBackToForm = () => {
+    setStep(1);
+    setOtp("");
+    setError(null);
+    setMessage(null);
+  };
+
+  if (step === 2) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-yellow-50 to-blue-100 flex items-center justify-center p-4">
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 w-full max-w-md border border-blue-200">
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Heart className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-800 mb-2">
+              Verify Your Email
+            </h1>
+            <p className="text-gray-600">
+              Enter the OTP sent to {signupData.email}
+            </p>
+          </div>
+
+          {message && (
+            <div className="bg-green-100 text-green-700 p-3 rounded-xl mb-4 text-sm">
+              {message}
+            </div>
+          )}
+
+          {error && (
+            <div className="bg-red-100 text-red-700 p-3 rounded-xl mb-4 text-sm">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleOtpSubmit} className="space-y-6">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Enter 6-digit OTP"
+                value={otp}
+                onChange={(e) =>
+                  setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
+                }
+                maxLength={6}
+                className="w-full text-center py-4 px-4 border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition-all bg-white/70 text-gray-800 placeholder-gray-500 hover:bg-white/90 text-lg tracking-widest"
+                required
+                disabled={isLoading}
+              />
+            </div>
+
+            <div className="flex space-x-3">
+              <button
+                type="button"
+                onClick={handleBackToForm}
+                className="flex-1 bg-white border-2 border-blue-200 text-blue-600 py-3 px-4 rounded-xl hover:bg-blue-50 hover:border-blue-300 focus:ring-4 focus:ring-blue-200 transition-all duration-200 font-semibold transform hover:scale-105"
+                disabled={isLoading}
+              >
+                <ArrowLeft className="h-4 w-4 inline mr-2" />
+                Back
+              </button>
+
+              <button
+                type="submit"
+                className="flex-1 bg-gradient-to-r from-blue-400 to-yellow-400 text-white py-3 px-4 rounded-xl hover:from-blue-500 hover:to-yellow-500 focus:ring-4 focus:ring-blue-300 transition-all duration-200 font-semibold flex items-center justify-center gap-2 group transform hover:scale-105 shadow-lg disabled:opacity-50"
+                disabled={isLoading}
+              >
+                {isLoading ? "Verifying..." : "Verify OTP"}
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+
+            <div className="text-center text-sm text-gray-600">
+              Didn't receive OTP?{" "}
+              <button
+                type="button"
+                onClick={handleSignupSubmit}
+                className="text-blue-600 hover:text-yellow-600 underline font-medium transition-colors"
+                disabled={isLoading}
+              >
+                Resend OTP
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-yellow-50 to-blue-100 flex items-center justify-center p-4">
@@ -334,7 +459,7 @@ const Signup: React.FC<SignupProps> = ({ onSwitchToLogin }) => {
               className="w-full bg-gradient-to-r from-blue-400 to-yellow-400 text-white py-3 px-4 rounded-xl hover:from-blue-500 hover:to-yellow-500 focus:ring-4 focus:ring-blue-300 transition-all duration-200 font-semibold flex items-center justify-center gap-2 group transform hover:scale-105 shadow-lg disabled:opacity-50"
               disabled={isLoading}
             >
-              {isLoading ? "Creating Account..." : "Create Account"}
+              {isLoading ? "Sending OTP..." : "Send OTP"}
               <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </button>
 

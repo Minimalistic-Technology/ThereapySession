@@ -26,7 +26,7 @@ const Login: React.FC<LoginProps> = ({ onSwitchToSignup }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/userauth/login",
+        "http://localhost:5000/api/auth/login",
         loginData
       );
       const { token, user } = response.data;

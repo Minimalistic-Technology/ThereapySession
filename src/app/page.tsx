@@ -109,6 +109,118 @@ const PsychologyHomePage: React.FC = () => {
         </div>
       </section>
 
+      {/* Digital Products Section */}
+      <DigitalProducts />
+
+      {/* Services Section */}
+      <motion.section
+        id="services"
+        className="py-12 sm:py-16  px-4 sm:px-6"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={fadeIn}
+      >
+        <div className="max-w-6xl mx-auto">
+          <motion.h3
+            className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-8 sm:mb-12"
+            variants={fadeInUp}
+          >
+            My Services
+          </motion.h3>
+
+          <motion.div
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+            variants={staggerContainer}
+          >
+            <motion.div
+              className="bg-yellow-50/80 backdrop-blur-sm rounded-2xl p-6   sm:pt-6 sm:pb-4 sm:pl-6 sm:pr-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col"
+              variants={staggerItem}
+              whileHover={{
+                y: -8,
+                transition: { duration: 0.3 },
+              }}
+            >
+              <div className="w-12 h-12 sm:w-16 sm:h-16  bg-yellow-200 rounded-full flex items-center justify-center mb-4 sm:mb-6">
+                <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600" />
+              </div>
+              <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
+                Individual Therapy
+              </h4>
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                Deep understanding of your difficulties, collaborative
+                therapeutic planning, and skill development to build a
+                healthier, more meaningful life. Sessions typically start weekly
+                and progress to biweekly as you develop autonomy.
+              </p>
+              <button
+                className="w-full mt-auto bg-blue-200 rounded-2xl py-2 text-gray-800 "
+                onClick={() => {
+                  setShowIndividualTherapyModal(true);
+                }}
+              >
+                Click here
+              </button>
+            </motion.div>
+
+            <motion.div
+              className="bg-yellow-50/80 backdrop-blur-sm rounded-2xl p-6 sm:pt-6 sm:pb-4 sm:pl-6 sm:pr-6 flex flex-col shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+              variants={staggerItem}
+              whileHover={{
+                y: -8,
+                transition: { duration: 0.3 },
+              }}
+              onClick={() => {
+                setshowCouplesTherapyModal(true);
+              }}
+            >
+              <div className="w-12 h-12 sm:w-16 sm:h-16  bg-yellow-200 rounded-full flex items-center justify-center mb-4 sm:mb-6">
+                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600" />
+              </div>
+              <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
+                Couples Therapy
+              </h4>
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                Analysis of relationship dynamics, identification of conflict
+                points, and collaborative development of skills to build the
+                relationship you both desire. Working together to create
+                meaningful connections.
+              </p>
+              <button className="w-full bg-blue-200 rounded-2xl py-2 mt-auto text-gray-800 ">
+                Click here
+              </button>
+            </motion.div>
+
+            <motion.div
+              className="bg-yellow-50/80 backdrop-blur-sm rounded-2xl p-6 sm:pt-6 sm:pb-4 sm:pl-6 sm:pr-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 sm:col-span-2 flex flex-col lg:col-span-1"
+              variants={staggerItem}
+              whileHover={{
+                y: -8,
+                transition: { duration: 0.3 },
+              }}
+              onClick={() => {
+                setshowCSModal(true);
+              }}
+            >
+              <div className="w-12 h-12 sm:w-16 sm:h-16   bg-yellow-200 rounded-full flex items-center justify-center mb-4 sm:mb-6">
+                <Award className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600" />
+              </div>
+              <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
+                Clinical Supervision
+              </h4>
+              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                Supporting psychologists at different career stages with care
+                and respect. Collaborative evaluation, skill development, and
+                recognition of the beauty in each professional journey stage.
+              </p>
+              <button className="w-full bg-blue-200 rounded-2xl py-2 mt-auto text-gray-800 ">
+                Click here
+              </button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </motion.section>
+
       {/* Who Am I Section */}
       <motion.section
         id="about"
@@ -229,119 +341,6 @@ const PsychologyHomePage: React.FC = () => {
           </motion.div>
         </div>
       </motion.section>
-
-      {/* Services Section */}
-      <motion.section
-        id="services"
-        className="py-12 sm:py-16  px-4 sm:px-6"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={fadeIn}
-      >
-        <div className="max-w-6xl mx-auto">
-          <motion.h3
-            className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-8 sm:mb-12"
-            variants={fadeInUp}
-          >
-            My Services
-          </motion.h3>
-
-          <motion.div
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-            variants={staggerContainer}
-          >
-            <motion.div
-              className="bg-yellow-50/80 backdrop-blur-sm rounded-2xl p-6   sm:pt-6 sm:pb-4 sm:pl-6 sm:pr-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col"
-              variants={staggerItem}
-              whileHover={{
-                y: -8,
-                transition: { duration: 0.3 },
-              }}
-            >
-              <div className="w-12 h-12 sm:w-16 sm:h-16  bg-yellow-200 rounded-full flex items-center justify-center mb-4 sm:mb-6">
-                <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600" />
-              </div>
-              <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
-                Individual Therapy
-              </h4>
-              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                Deep understanding of your difficulties, collaborative
-                therapeutic planning, and skill development to build a
-                healthier, more meaningful life. Sessions typically start weekly
-                and progress to biweekly as you develop autonomy.
-              </p>
-              <button
-                className="w-full mt-auto bg-blue-200 rounded-2xl py-2 text-gray-800 "
-                onClick={() => {
-                  setShowIndividualTherapyModal(true);
-                }}
-              >
-                Click here
-              </button>
-            </motion.div>
-
-            <motion.div
-              className="bg-yellow-50/80 backdrop-blur-sm rounded-2xl p-6 sm:pt-6 sm:pb-4 sm:pl-6 sm:pr-6 flex flex-col shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-              variants={staggerItem}
-              whileHover={{
-                y: -8,
-                transition: { duration: 0.3 },
-              }}
-              onClick={() => {
-                setshowCouplesTherapyModal(true);
-              }}
-            >
-              <div className="w-12 h-12 sm:w-16 sm:h-16  bg-yellow-200 rounded-full flex items-center justify-center mb-4 sm:mb-6">
-                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600" />
-              </div>
-              <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
-                Couples Therapy
-              </h4>
-              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                Analysis of relationship dynamics, identification of conflict
-                points, and collaborative development of skills to build the
-                relationship you both desire. Working together to create
-                meaningful connections.
-              </p>
-              <button className="w-full bg-blue-200 rounded-2xl py-2 mt-auto text-gray-800 ">
-                Click here
-              </button>
-            </motion.div>
-
-            <motion.div
-              className="bg-yellow-50/80 backdrop-blur-sm rounded-2xl p-6 sm:pt-6 sm:pb-4 sm:pl-6 sm:pr-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 sm:col-span-2 flex flex-col lg:col-span-1"
-              variants={staggerItem}
-              whileHover={{
-                y: -8,
-                transition: { duration: 0.3 },
-              }}
-              onClick={() => {
-                setshowCSModal(true);
-              }}
-            >
-              <div className="w-12 h-12 sm:w-16 sm:h-16   bg-yellow-200 rounded-full flex items-center justify-center mb-4 sm:mb-6">
-                <Award className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-600" />
-              </div>
-              <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">
-                Clinical Supervision
-              </h4>
-              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                Supporting psychologists at different career stages with care
-                and respect. Collaborative evaluation, skill development, and
-                recognition of the beauty in each professional journey stage.
-              </p>
-              <button className="w-full bg-blue-200 rounded-2xl py-2 mt-auto text-gray-800 ">
-                Click here
-              </button>
-            </motion.div>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Digital Products Section */}
-      <DigitalProducts />
-    
 
       <Testimonials />
 

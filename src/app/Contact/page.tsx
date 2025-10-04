@@ -265,7 +265,7 @@ function App() {
           >
             Schedule Consultation
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </button> 
         </div>
       </div>
     </div>
